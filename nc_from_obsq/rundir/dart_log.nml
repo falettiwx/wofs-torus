@@ -1,0 +1,988 @@
+ !Starting Program obs_seq_to_netcdf
+ &UTILITIES_NML
+ TERMLEVEL       =           1,
+ LOGFILENAME     = dart_log.out                                                                                                      
+                                                                                                                                     
+           ,
+ MODULE_DETAILS  = F,
+ NMLFILENAME     = dart_log.nml                                                                                                      
+                                                                                                                                     
+           ,
+ PRINT_DEBUG     = F,
+ WRITE_NML       = file                            
+ /
+ &OBS_SEQUENCE_NML
+ WRITE_BINARY_OBS_SEQUENCE       = F,
+ READ_BINARY_FILE_FORMAT = native                          
+ /
+ &OBS_SEQ_TO_NETCDF_NML
+ OBS_SEQUENCE_NAME       =                                                                                                           
+                                                                                                                                     
+                   ,
+ OBS_SEQUENCE_LIST       = /home/william.faletti/wof-torus/nc_from_obsq/rundir/obsflist                                              
+                                                                                                                                     
+                   ,
+ LONLIM1 =   160.000000000000     ,
+ LONLIM2 =   40.0000000000000     ,
+ LATLIM1 =   10.0000000000000     ,
+ LATLIM2 =   65.0000000000000     ,
+ VERBOSE = F,
+ APPEND_TO_NETCDF        = F,
+ DEBUG   = F
+ /
+ &SCHEDULE_NML
+ FIRST_BIN_START =        2000, 2*1, 3*0,
+ FIRST_BIN_END   =        2030, 2*1, 3*0,
+ LAST_BIN_END    =        2030, 2*1, 3*0,
+ BIN_INTERVAL_DAYS       =     1000000,
+ BIN_INTERVAL_SECONDS    =           0,
+ MAX_NUM_BINS    =           2,
+ CALENDAR        = Gregorian                       ,
+ PRINT_TABLE     = T
+ /
+ &LOCATION_NML
+ HORIZ_DIST_ONLY = F,
+ VERT_NORMALIZATION_PRESSURE     =   700000.000000000     ,
+ VERT_NORMALIZATION_HEIGHT       =   111111.100000000     ,
+ VERT_NORMALIZATION_LEVEL        =   2666.70000000000     ,
+ VERT_NORMALIZATION_SCALE_HEIGHT =   5.00000000000000     ,
+ APPROXIMATE_DISTANCE    = F,
+ NLON    =         283,
+ NLAT    =         144,
+ OUTPUT_BOX_INFO = F,
+ PRINT_BOX_LEVEL =           0,
+ SPECIAL_VERT_NORMALIZATION_OBS_TYPES    = METAR_ALTIMETER                METAR_U_10_METER_WIND          METAR_V_10_METER_WIND       
+    METAR_TEMPERATURE_2_METER      METAR_DEWPOINT_2_METER         LAND_SFC_U_WIND_COMPONENT      LAND_SFC_V_WIND_COMPONENT      LAND_
+ SFC_TEMPERATURE           LAND_SFC_DEWPOINT              LAND_SFC_ALTIMETER             RADAR_REFLECTIVITY             RADAR_CLEARAI
+ R_REFLECTIVITY    DOPPLER_RADIAL_VELOCITY        NOXP_RADIAL_VELOCITY           P3_RADIAL_VELOCITY             RADIOSONDE_U_WIND_COM
+ PONENT    RADIOSONDE_V_WIND_COMPONENT    RADIOSONDE_TEMPERATURE         RADIOSONDE_DEWPOINT            DWLVAD_UWIND                 
+   DWLVAD_VWIND                   MM_TEMPERATURE                 MM_DEWPOINT                    WS_TEMPERATURE                 WS_DEW
+ POINT                    GOES_CWP_PATH                  GOES_LWP_PATH                  GOES_LWP0_PATH                 GOES_IWP_PATH 
+                  GOES_CWP_ZERO                  GOES_CWP_ZERO_NIGHT            null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           null                           nul
+ l                           null                           null                           null                           null       
+                     null                           null                           null                           null               
+             null                           null                           null                           null                       
+     null                           null                           null                           null                           null
+                            null                           null                           null                           null        
+                    null                           null                           null                           null                
+            null                           null                           null                           null                        
+    null                           null                           null                           null                           null 
+                           null                           null                           null                           null         
+                   null                           null                           null                           null                 
+           null                           null                           null                           null                         
+   null                           null                           null                           null                           null  
+                          null                           null                           null                           null          
+                  null                           null                           null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           null                           nul
+ l                           null                           null                           null                           null       
+                     null                           null                           null                           null               
+             null                           null                           null                           null                       
+     null                           null                           null                           null                           null
+                            null                           null                           null                           null        
+                    null                           null                           null                           null                
+            null                           null                           null                           null                        
+    null                           null                           null                           null                           null 
+                           null                           null                           null                           null         
+                   null                           null                           null                           null                 
+           null                           null                           null                           null                         
+   null                           null                           null                           null                           null  
+                          null                           null                           null                           null          
+                  null                           null                           null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           null                           nul
+ l                           null                           null                           null                           null       
+                     null                           null                           null                           null               
+             null                           null                           null                           null                       
+     null                           null                           null                           null                           null
+                            null                           null                           null                           null        
+                    null                           null                           null                           null                
+            null                           null                           null                           null                        
+    null                           null                           null                           null                           null 
+                           null                           null                           null                           null         
+                   null                           null                           null                           null                 
+           null                           null                           null                           null                         
+   null                           null                           null                           null                           null  
+                          null                           null                           null                           null          
+                  null                           null                           null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           ,
+ SPECIAL_VERT_NORMALIZATION_PRESSURES    = 31*-999999.900000000       , 469*-888888.000000000       ,
+ SPECIAL_VERT_NORMALIZATION_HEIGHTS      = 5*424413.181578000        , 5*848826.363157000        ,
+  5*3183098.86183800        , 4*424413.181578000        , 2*848826.363157000        , 4*2122065.90789200        ,
+  4*1587303.39433900        , 2*1000008.61848900        , 469*-888888.000000000       ,
+ SPECIAL_VERT_NORMALIZATION_LEVELS       = 31*-999999.900000000       , 469*-888888.000000000       ,
+ SPECIAL_VERT_NORMALIZATION_SCALE_HEIGHTS        = 31*-999999.900000000       , 469*-888888.000000000       
+ /
+ &OBS_DEF_RADAR_MOD_NML
+ APPLY_REF_LIMIT_TO_OBS  = T,
+ REFLECTIVITY_LIMIT_OBS  =  0.000000000000000E+000,
+ LOWEST_REFLECTIVITY_OBS =  0.000000000000000E+000,
+ APPLY_REF_LIMIT_TO_FWD_OP       = T,
+ REFLECTIVITY_LIMIT_FWD_OP       =  0.000000000000000E+000,
+ LOWEST_REFLECTIVITY_FWD_OP      =  0.000000000000000E+000,
+ MAX_RADIAL_VEL_OBS      =     1000000,
+ ALLOW_WET_GRAUPEL       = F,
+ DIELECTRIC_FACTOR       =  0.224000000000000     ,
+ MICROPHYSICS_TYPE       =           5,
+ ALLOW_DBZTOWT_CONV      = T,
+ N0_RAIN =   8000000.00000000     ,
+ N0_GRAUPEL      =   4000000.00000000     ,
+ N0_SNOW =   3000000.00000000     ,
+ RHO_RAIN        =   1000.00000000000     ,
+ RHO_GRAUPEL     =   400.000000000000     ,
+ RHO_SNOW        =   100.000000000000     
+ /
+ !Starting Program obs_seq_to_netcdf
+ &UTILITIES_NML
+ TERMLEVEL       =           1,
+ LOGFILENAME     = dart_log.out                                                                                                      
+                                                                                                                                     
+           ,
+ MODULE_DETAILS  = F,
+ NMLFILENAME     = dart_log.nml                                                                                                      
+                                                                                                                                     
+           ,
+ PRINT_DEBUG     = F,
+ WRITE_NML       = file                            
+ /
+ &OBS_SEQUENCE_NML
+ WRITE_BINARY_OBS_SEQUENCE       = F,
+ READ_BINARY_FILE_FORMAT = native                          
+ /
+ &OBS_SEQ_TO_NETCDF_NML
+ OBS_SEQUENCE_NAME       =                                                                                                           
+                                                                                                                                     
+                   ,
+ OBS_SEQUENCE_LIST       = /home/william.faletti/wof-torus/nc_from_obsq/rundir/obsflist                                              
+                                                                                                                                     
+                   ,
+ LONLIM1 =   160.000000000000     ,
+ LONLIM2 =   40.0000000000000     ,
+ LATLIM1 =   10.0000000000000     ,
+ LATLIM2 =   65.0000000000000     ,
+ VERBOSE = F,
+ APPEND_TO_NETCDF        = F,
+ DEBUG   = F
+ /
+ &SCHEDULE_NML
+ FIRST_BIN_START =        2000, 2*1, 3*0,
+ FIRST_BIN_END   =        2030, 2*1, 3*0,
+ LAST_BIN_END    =        2030, 2*1, 3*0,
+ BIN_INTERVAL_DAYS       =     1000000,
+ BIN_INTERVAL_SECONDS    =           0,
+ MAX_NUM_BINS    =           2,
+ CALENDAR        = Gregorian                       ,
+ PRINT_TABLE     = T
+ /
+ &LOCATION_NML
+ HORIZ_DIST_ONLY = F,
+ VERT_NORMALIZATION_PRESSURE     =   700000.000000000     ,
+ VERT_NORMALIZATION_HEIGHT       =   111111.100000000     ,
+ VERT_NORMALIZATION_LEVEL        =   2666.70000000000     ,
+ VERT_NORMALIZATION_SCALE_HEIGHT =   5.00000000000000     ,
+ APPROXIMATE_DISTANCE    = F,
+ NLON    =         283,
+ NLAT    =         144,
+ OUTPUT_BOX_INFO = F,
+ PRINT_BOX_LEVEL =           0,
+ SPECIAL_VERT_NORMALIZATION_OBS_TYPES    = METAR_ALTIMETER                METAR_U_10_METER_WIND          METAR_V_10_METER_WIND       
+    METAR_TEMPERATURE_2_METER      METAR_DEWPOINT_2_METER         LAND_SFC_U_WIND_COMPONENT      LAND_SFC_V_WIND_COMPONENT      LAND_
+ SFC_TEMPERATURE           LAND_SFC_DEWPOINT              LAND_SFC_ALTIMETER             RADAR_REFLECTIVITY             RADAR_CLEARAI
+ R_REFLECTIVITY    DOPPLER_RADIAL_VELOCITY        NOXP_RADIAL_VELOCITY           P3_RADIAL_VELOCITY             RADIOSONDE_U_WIND_COM
+ PONENT    RADIOSONDE_V_WIND_COMPONENT    RADIOSONDE_TEMPERATURE         RADIOSONDE_DEWPOINT            DWLVAD_UWIND                 
+   DWLVAD_VWIND                   MM_TEMPERATURE                 MM_DEWPOINT                    WS_TEMPERATURE                 WS_DEW
+ POINT                    GOES_CWP_PATH                  GOES_LWP_PATH                  GOES_LWP0_PATH                 GOES_IWP_PATH 
+                  GOES_CWP_ZERO                  GOES_CWP_ZERO_NIGHT            null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           null                           nul
+ l                           null                           null                           null                           null       
+                     null                           null                           null                           null               
+             null                           null                           null                           null                       
+     null                           null                           null                           null                           null
+                            null                           null                           null                           null        
+                    null                           null                           null                           null                
+            null                           null                           null                           null                        
+    null                           null                           null                           null                           null 
+                           null                           null                           null                           null         
+                   null                           null                           null                           null                 
+           null                           null                           null                           null                         
+   null                           null                           null                           null                           null  
+                          null                           null                           null                           null          
+                  null                           null                           null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           null                           nul
+ l                           null                           null                           null                           null       
+                     null                           null                           null                           null               
+             null                           null                           null                           null                       
+     null                           null                           null                           null                           null
+                            null                           null                           null                           null        
+                    null                           null                           null                           null                
+            null                           null                           null                           null                        
+    null                           null                           null                           null                           null 
+                           null                           null                           null                           null         
+                   null                           null                           null                           null                 
+           null                           null                           null                           null                         
+   null                           null                           null                           null                           null  
+                          null                           null                           null                           null          
+                  null                           null                           null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           null                           nul
+ l                           null                           null                           null                           null       
+                     null                           null                           null                           null               
+             null                           null                           null                           null                       
+     null                           null                           null                           null                           null
+                            null                           null                           null                           null        
+                    null                           null                           null                           null                
+            null                           null                           null                           null                        
+    null                           null                           null                           null                           null 
+                           null                           null                           null                           null         
+                   null                           null                           null                           null                 
+           null                           null                           null                           null                         
+   null                           null                           null                           null                           null  
+                          null                           null                           null                           null          
+                  null                           null                           null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           ,
+ SPECIAL_VERT_NORMALIZATION_PRESSURES    = 31*-999999.900000000       , 469*-888888.000000000       ,
+ SPECIAL_VERT_NORMALIZATION_HEIGHTS      = 5*424413.181578000        , 5*848826.363157000        ,
+  5*3183098.86183800        , 4*424413.181578000        , 2*848826.363157000        , 4*2122065.90789200        ,
+  4*1587303.39433900        , 2*1000008.61848900        , 469*-888888.000000000       ,
+ SPECIAL_VERT_NORMALIZATION_LEVELS       = 31*-999999.900000000       , 469*-888888.000000000       ,
+ SPECIAL_VERT_NORMALIZATION_SCALE_HEIGHTS        = 31*-999999.900000000       , 469*-888888.000000000       
+ /
+ &OBS_DEF_RADAR_MOD_NML
+ APPLY_REF_LIMIT_TO_OBS  = T,
+ REFLECTIVITY_LIMIT_OBS  =  0.000000000000000E+000,
+ LOWEST_REFLECTIVITY_OBS =  0.000000000000000E+000,
+ APPLY_REF_LIMIT_TO_FWD_OP       = T,
+ REFLECTIVITY_LIMIT_FWD_OP       =  0.000000000000000E+000,
+ LOWEST_REFLECTIVITY_FWD_OP      =  0.000000000000000E+000,
+ MAX_RADIAL_VEL_OBS      =     1000000,
+ ALLOW_WET_GRAUPEL       = F,
+ DIELECTRIC_FACTOR       =  0.224000000000000     ,
+ MICROPHYSICS_TYPE       =           5,
+ ALLOW_DBZTOWT_CONV      = T,
+ N0_RAIN =   8000000.00000000     ,
+ N0_GRAUPEL      =   4000000.00000000     ,
+ N0_SNOW =   3000000.00000000     ,
+ RHO_RAIN        =   1000.00000000000     ,
+ RHO_GRAUPEL     =   400.000000000000     ,
+ RHO_SNOW        =   100.000000000000     
+ /
+ !Starting Program obs_seq_to_netcdf
+ &UTILITIES_NML
+ TERMLEVEL       =           1,
+ LOGFILENAME     = dart_log.out                                                                                                      
+                                                                                                                                     
+           ,
+ MODULE_DETAILS  = F,
+ NMLFILENAME     = dart_log.nml                                                                                                      
+                                                                                                                                     
+           ,
+ PRINT_DEBUG     = F,
+ WRITE_NML       = file                            
+ /
+ &OBS_SEQUENCE_NML
+ WRITE_BINARY_OBS_SEQUENCE       = F,
+ READ_BINARY_FILE_FORMAT = native                          
+ /
+ &OBS_SEQ_TO_NETCDF_NML
+ OBS_SEQUENCE_NAME       =                                                                                                           
+                                                                                                                                     
+                   ,
+ OBS_SEQUENCE_LIST       = /home/william.faletti/wof-torus/nc_from_obsq/rundir/obsflist                                              
+                                                                                                                                     
+                   ,
+ LONLIM1 =   160.000000000000     ,
+ LONLIM2 =   40.0000000000000     ,
+ LATLIM1 =   10.0000000000000     ,
+ LATLIM2 =   65.0000000000000     ,
+ VERBOSE = F,
+ APPEND_TO_NETCDF        = F,
+ DEBUG   = F
+ /
+ &SCHEDULE_NML
+ FIRST_BIN_START =        2000, 2*1, 3*0,
+ FIRST_BIN_END   =        2030, 2*1, 3*0,
+ LAST_BIN_END    =        2030, 2*1, 3*0,
+ BIN_INTERVAL_DAYS       =     1000000,
+ BIN_INTERVAL_SECONDS    =           0,
+ MAX_NUM_BINS    =           2,
+ CALENDAR        = Gregorian                       ,
+ PRINT_TABLE     = T
+ /
+ &LOCATION_NML
+ HORIZ_DIST_ONLY = F,
+ VERT_NORMALIZATION_PRESSURE     =   700000.000000000     ,
+ VERT_NORMALIZATION_HEIGHT       =   111111.100000000     ,
+ VERT_NORMALIZATION_LEVEL        =   2666.70000000000     ,
+ VERT_NORMALIZATION_SCALE_HEIGHT =   5.00000000000000     ,
+ APPROXIMATE_DISTANCE    = F,
+ NLON    =         283,
+ NLAT    =         144,
+ OUTPUT_BOX_INFO = F,
+ PRINT_BOX_LEVEL =           0,
+ SPECIAL_VERT_NORMALIZATION_OBS_TYPES    = METAR_ALTIMETER                METAR_U_10_METER_WIND          METAR_V_10_METER_WIND       
+    METAR_TEMPERATURE_2_METER      METAR_DEWPOINT_2_METER         LAND_SFC_U_WIND_COMPONENT      LAND_SFC_V_WIND_COMPONENT      LAND_
+ SFC_TEMPERATURE           LAND_SFC_DEWPOINT              LAND_SFC_ALTIMETER             RADAR_REFLECTIVITY             RADAR_CLEARAI
+ R_REFLECTIVITY    DOPPLER_RADIAL_VELOCITY        NOXP_RADIAL_VELOCITY           P3_RADIAL_VELOCITY             RADIOSONDE_U_WIND_COM
+ PONENT    RADIOSONDE_V_WIND_COMPONENT    RADIOSONDE_TEMPERATURE         RADIOSONDE_DEWPOINT            DWLVAD_UWIND                 
+   DWLVAD_VWIND                   MM_TEMPERATURE                 MM_DEWPOINT                    WS_TEMPERATURE                 WS_DEW
+ POINT                    GOES_CWP_PATH                  GOES_LWP_PATH                  GOES_LWP0_PATH                 GOES_IWP_PATH 
+                  GOES_CWP_ZERO                  GOES_CWP_ZERO_NIGHT            null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           null                           nul
+ l                           null                           null                           null                           null       
+                     null                           null                           null                           null               
+             null                           null                           null                           null                       
+     null                           null                           null                           null                           null
+                            null                           null                           null                           null        
+                    null                           null                           null                           null                
+            null                           null                           null                           null                        
+    null                           null                           null                           null                           null 
+                           null                           null                           null                           null         
+                   null                           null                           null                           null                 
+           null                           null                           null                           null                         
+   null                           null                           null                           null                           null  
+                          null                           null                           null                           null          
+                  null                           null                           null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           null                           nul
+ l                           null                           null                           null                           null       
+                     null                           null                           null                           null               
+             null                           null                           null                           null                       
+     null                           null                           null                           null                           null
+                            null                           null                           null                           null        
+                    null                           null                           null                           null                
+            null                           null                           null                           null                        
+    null                           null                           null                           null                           null 
+                           null                           null                           null                           null         
+                   null                           null                           null                           null                 
+           null                           null                           null                           null                         
+   null                           null                           null                           null                           null  
+                          null                           null                           null                           null          
+                  null                           null                           null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           null                           nul
+ l                           null                           null                           null                           null       
+                     null                           null                           null                           null               
+             null                           null                           null                           null                       
+     null                           null                           null                           null                           null
+                            null                           null                           null                           null        
+                    null                           null                           null                           null                
+            null                           null                           null                           null                        
+    null                           null                           null                           null                           null 
+                           null                           null                           null                           null         
+                   null                           null                           null                           null                 
+           null                           null                           null                           null                         
+   null                           null                           null                           null                           null  
+                          null                           null                           null                           null          
+                  null                           null                           null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           ,
+ SPECIAL_VERT_NORMALIZATION_PRESSURES    = 31*-999999.900000000       , 469*-888888.000000000       ,
+ SPECIAL_VERT_NORMALIZATION_HEIGHTS      = 5*424413.181578000        , 5*848826.363157000        ,
+  5*3183098.86183800        , 4*424413.181578000        , 2*848826.363157000        , 4*2122065.90789200        ,
+  4*1587303.39433900        , 2*1000008.61848900        , 469*-888888.000000000       ,
+ SPECIAL_VERT_NORMALIZATION_LEVELS       = 31*-999999.900000000       , 469*-888888.000000000       ,
+ SPECIAL_VERT_NORMALIZATION_SCALE_HEIGHTS        = 31*-999999.900000000       , 469*-888888.000000000       
+ /
+ &OBS_DEF_RADAR_MOD_NML
+ APPLY_REF_LIMIT_TO_OBS  = T,
+ REFLECTIVITY_LIMIT_OBS  =  0.000000000000000E+000,
+ LOWEST_REFLECTIVITY_OBS =  0.000000000000000E+000,
+ APPLY_REF_LIMIT_TO_FWD_OP       = T,
+ REFLECTIVITY_LIMIT_FWD_OP       =  0.000000000000000E+000,
+ LOWEST_REFLECTIVITY_FWD_OP      =  0.000000000000000E+000,
+ MAX_RADIAL_VEL_OBS      =     1000000,
+ ALLOW_WET_GRAUPEL       = F,
+ DIELECTRIC_FACTOR       =  0.224000000000000     ,
+ MICROPHYSICS_TYPE       =           5,
+ ALLOW_DBZTOWT_CONV      = T,
+ N0_RAIN =   8000000.00000000     ,
+ N0_GRAUPEL      =   4000000.00000000     ,
+ N0_SNOW =   3000000.00000000     ,
+ RHO_RAIN        =   1000.00000000000     ,
+ RHO_GRAUPEL     =   400.000000000000     ,
+ RHO_SNOW        =   100.000000000000     
+ /
+ !Finished Program 
+ !Starting Program obs_seq_to_netcdf
+ &UTILITIES_NML
+ TERMLEVEL       =           1,
+ LOGFILENAME     = dart_log.out                                                                                                      
+                                                                                                                                     
+           ,
+ MODULE_DETAILS  = F,
+ NMLFILENAME     = dart_log.nml                                                                                                      
+                                                                                                                                     
+           ,
+ PRINT_DEBUG     = F,
+ WRITE_NML       = file                            
+ /
+ &OBS_SEQUENCE_NML
+ WRITE_BINARY_OBS_SEQUENCE       = F,
+ READ_BINARY_FILE_FORMAT = native                          
+ /
+ &OBS_SEQ_TO_NETCDF_NML
+ OBS_SEQUENCE_NAME       =                                                                                                           
+                                                                                                                                     
+                   ,
+ OBS_SEQUENCE_LIST       = /home/william.faletti/wof-torus/nc_from_obsq/rundir/obsflist                                              
+                                                                                                                                     
+                   ,
+ LONLIM1 =   160.000000000000     ,
+ LONLIM2 =   40.0000000000000     ,
+ LATLIM1 =   10.0000000000000     ,
+ LATLIM2 =   65.0000000000000     ,
+ VERBOSE = F,
+ APPEND_TO_NETCDF        = F,
+ DEBUG   = F
+ /
+ &SCHEDULE_NML
+ FIRST_BIN_START =        2000, 2*1, 3*0,
+ FIRST_BIN_END   =        2030, 2*1, 3*0,
+ LAST_BIN_END    =        2030, 2*1, 3*0,
+ BIN_INTERVAL_DAYS       =     1000000,
+ BIN_INTERVAL_SECONDS    =           0,
+ MAX_NUM_BINS    =           2,
+ CALENDAR        = Gregorian                       ,
+ PRINT_TABLE     = T
+ /
+ &LOCATION_NML
+ HORIZ_DIST_ONLY = F,
+ VERT_NORMALIZATION_PRESSURE     =   700000.000000000     ,
+ VERT_NORMALIZATION_HEIGHT       =   111111.100000000     ,
+ VERT_NORMALIZATION_LEVEL        =   2666.70000000000     ,
+ VERT_NORMALIZATION_SCALE_HEIGHT =   5.00000000000000     ,
+ APPROXIMATE_DISTANCE    = F,
+ NLON    =         283,
+ NLAT    =         144,
+ OUTPUT_BOX_INFO = F,
+ PRINT_BOX_LEVEL =           0,
+ SPECIAL_VERT_NORMALIZATION_OBS_TYPES    = METAR_ALTIMETER                METAR_U_10_METER_WIND          METAR_V_10_METER_WIND       
+    METAR_TEMPERATURE_2_METER      METAR_DEWPOINT_2_METER         LAND_SFC_U_WIND_COMPONENT      LAND_SFC_V_WIND_COMPONENT      LAND_
+ SFC_TEMPERATURE           LAND_SFC_DEWPOINT              LAND_SFC_ALTIMETER             RADAR_REFLECTIVITY             RADAR_CLEARAI
+ R_REFLECTIVITY    DOPPLER_RADIAL_VELOCITY        NOXP_RADIAL_VELOCITY           P3_RADIAL_VELOCITY             RADIOSONDE_U_WIND_COM
+ PONENT    RADIOSONDE_V_WIND_COMPONENT    RADIOSONDE_TEMPERATURE         RADIOSONDE_DEWPOINT            DWLVAD_UWIND                 
+   DWLVAD_VWIND                   MM_TEMPERATURE                 MM_DEWPOINT                    WS_TEMPERATURE                 WS_DEW
+ POINT                    GOES_CWP_PATH                  GOES_LWP_PATH                  GOES_LWP0_PATH                 GOES_IWP_PATH 
+                  GOES_CWP_ZERO                  GOES_CWP_ZERO_NIGHT            null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           null                           nul
+ l                           null                           null                           null                           null       
+                     null                           null                           null                           null               
+             null                           null                           null                           null                       
+     null                           null                           null                           null                           null
+                            null                           null                           null                           null        
+                    null                           null                           null                           null                
+            null                           null                           null                           null                        
+    null                           null                           null                           null                           null 
+                           null                           null                           null                           null         
+                   null                           null                           null                           null                 
+           null                           null                           null                           null                         
+   null                           null                           null                           null                           null  
+                          null                           null                           null                           null          
+                  null                           null                           null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           null                           nul
+ l                           null                           null                           null                           null       
+                     null                           null                           null                           null               
+             null                           null                           null                           null                       
+     null                           null                           null                           null                           null
+                            null                           null                           null                           null        
+                    null                           null                           null                           null                
+            null                           null                           null                           null                        
+    null                           null                           null                           null                           null 
+                           null                           null                           null                           null         
+                   null                           null                           null                           null                 
+           null                           null                           null                           null                         
+   null                           null                           null                           null                           null  
+                          null                           null                           null                           null          
+                  null                           null                           null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           null                           nul
+ l                           null                           null                           null                           null       
+                     null                           null                           null                           null               
+             null                           null                           null                           null                       
+     null                           null                           null                           null                           null
+                            null                           null                           null                           null        
+                    null                           null                           null                           null                
+            null                           null                           null                           null                        
+    null                           null                           null                           null                           null 
+                           null                           null                           null                           null         
+                   null                           null                           null                           null                 
+           null                           null                           null                           null                         
+   null                           null                           null                           null                           null  
+                          null                           null                           null                           null          
+                  null                           null                           null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           ,
+ SPECIAL_VERT_NORMALIZATION_PRESSURES    = 31*-999999.900000000       , 469*-888888.000000000       ,
+ SPECIAL_VERT_NORMALIZATION_HEIGHTS      = 5*424413.181578000        , 5*848826.363157000        ,
+  5*3183098.86183800        , 4*424413.181578000        , 2*848826.363157000        , 4*2122065.90789200        ,
+  4*1587303.39433900        , 2*1000008.61848900        , 469*-888888.000000000       ,
+ SPECIAL_VERT_NORMALIZATION_LEVELS       = 31*-999999.900000000       , 469*-888888.000000000       ,
+ SPECIAL_VERT_NORMALIZATION_SCALE_HEIGHTS        = 31*-999999.900000000       , 469*-888888.000000000       
+ /
+ &OBS_DEF_RADAR_MOD_NML
+ APPLY_REF_LIMIT_TO_OBS  = T,
+ REFLECTIVITY_LIMIT_OBS  =  0.000000000000000E+000,
+ LOWEST_REFLECTIVITY_OBS =  0.000000000000000E+000,
+ APPLY_REF_LIMIT_TO_FWD_OP       = T,
+ REFLECTIVITY_LIMIT_FWD_OP       =  0.000000000000000E+000,
+ LOWEST_REFLECTIVITY_FWD_OP      =  0.000000000000000E+000,
+ MAX_RADIAL_VEL_OBS      =     1000000,
+ ALLOW_WET_GRAUPEL       = F,
+ DIELECTRIC_FACTOR       =  0.224000000000000     ,
+ MICROPHYSICS_TYPE       =           5,
+ ALLOW_DBZTOWT_CONV      = T,
+ N0_RAIN =   8000000.00000000     ,
+ N0_GRAUPEL      =   4000000.00000000     ,
+ N0_SNOW =   3000000.00000000     ,
+ RHO_RAIN        =   1000.00000000000     ,
+ RHO_GRAUPEL     =   400.000000000000     ,
+ RHO_SNOW        =   100.000000000000     
+ /
+ !Finished Program 
+ !Starting Program obs_seq_to_netcdf
+ &UTILITIES_NML
+ TERMLEVEL       =           1,
+ LOGFILENAME     = dart_log.out                                                                                                      
+                                                                                                                                     
+           ,
+ MODULE_DETAILS  = F,
+ NMLFILENAME     = dart_log.nml                                                                                                      
+                                                                                                                                     
+           ,
+ PRINT_DEBUG     = F,
+ WRITE_NML       = file                            
+ /
+ &OBS_SEQUENCE_NML
+ WRITE_BINARY_OBS_SEQUENCE       = F,
+ READ_BINARY_FILE_FORMAT = native                          
+ /
+ &OBS_SEQ_TO_NETCDF_NML
+ OBS_SEQUENCE_NAME       =                                                                                                           
+                                                                                                                                     
+                   ,
+ OBS_SEQUENCE_LIST       = /home/william.faletti/wof-torus/nc_from_obsq/rundir/obsflist                                              
+                                                                                                                                     
+                   ,
+ LONLIM1 =   160.000000000000     ,
+ LONLIM2 =   40.0000000000000     ,
+ LATLIM1 =   10.0000000000000     ,
+ LATLIM2 =   65.0000000000000     ,
+ VERBOSE = F,
+ APPEND_TO_NETCDF        = F,
+ DEBUG   = F
+ /
+ &SCHEDULE_NML
+ FIRST_BIN_START =        2000, 2*1, 3*0,
+ FIRST_BIN_END   =        2030, 2*1, 3*0,
+ LAST_BIN_END    =        2030, 2*1, 3*0,
+ BIN_INTERVAL_DAYS       =     1000000,
+ BIN_INTERVAL_SECONDS    =           0,
+ MAX_NUM_BINS    =           2,
+ CALENDAR        = Gregorian                       ,
+ PRINT_TABLE     = T
+ /
+ &LOCATION_NML
+ HORIZ_DIST_ONLY = F,
+ VERT_NORMALIZATION_PRESSURE     =   700000.000000000     ,
+ VERT_NORMALIZATION_HEIGHT       =   111111.100000000     ,
+ VERT_NORMALIZATION_LEVEL        =   2666.70000000000     ,
+ VERT_NORMALIZATION_SCALE_HEIGHT =   5.00000000000000     ,
+ APPROXIMATE_DISTANCE    = F,
+ NLON    =         283,
+ NLAT    =         144,
+ OUTPUT_BOX_INFO = F,
+ PRINT_BOX_LEVEL =           0,
+ SPECIAL_VERT_NORMALIZATION_OBS_TYPES    = METAR_ALTIMETER                METAR_U_10_METER_WIND          METAR_V_10_METER_WIND       
+    METAR_TEMPERATURE_2_METER      METAR_DEWPOINT_2_METER         LAND_SFC_U_WIND_COMPONENT      LAND_SFC_V_WIND_COMPONENT      LAND_
+ SFC_TEMPERATURE           LAND_SFC_DEWPOINT              LAND_SFC_ALTIMETER             RADAR_REFLECTIVITY             RADAR_CLEARAI
+ R_REFLECTIVITY    DOPPLER_RADIAL_VELOCITY        NOXP_RADIAL_VELOCITY           P3_RADIAL_VELOCITY             RADIOSONDE_U_WIND_COM
+ PONENT    RADIOSONDE_V_WIND_COMPONENT    RADIOSONDE_TEMPERATURE         RADIOSONDE_DEWPOINT            DWLVAD_UWIND                 
+   DWLVAD_VWIND                   MM_TEMPERATURE                 MM_DEWPOINT                    WS_TEMPERATURE                 WS_DEW
+ POINT                    GOES_CWP_PATH                  GOES_LWP_PATH                  GOES_LWP0_PATH                 GOES_IWP_PATH 
+                  GOES_CWP_ZERO                  GOES_CWP_ZERO_NIGHT            null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           null                           nul
+ l                           null                           null                           null                           null       
+                     null                           null                           null                           null               
+             null                           null                           null                           null                       
+     null                           null                           null                           null                           null
+                            null                           null                           null                           null        
+                    null                           null                           null                           null                
+            null                           null                           null                           null                        
+    null                           null                           null                           null                           null 
+                           null                           null                           null                           null         
+                   null                           null                           null                           null                 
+           null                           null                           null                           null                         
+   null                           null                           null                           null                           null  
+                          null                           null                           null                           null          
+                  null                           null                           null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           null                           nul
+ l                           null                           null                           null                           null       
+                     null                           null                           null                           null               
+             null                           null                           null                           null                       
+     null                           null                           null                           null                           null
+                            null                           null                           null                           null        
+                    null                           null                           null                           null                
+            null                           null                           null                           null                        
+    null                           null                           null                           null                           null 
+                           null                           null                           null                           null         
+                   null                           null                           null                           null                 
+           null                           null                           null                           null                         
+   null                           null                           null                           null                           null  
+                          null                           null                           null                           null          
+                  null                           null                           null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           null                           nul
+ l                           null                           null                           null                           null       
+                     null                           null                           null                           null               
+             null                           null                           null                           null                       
+     null                           null                           null                           null                           null
+                            null                           null                           null                           null        
+                    null                           null                           null                           null                
+            null                           null                           null                           null                        
+    null                           null                           null                           null                           null 
+                           null                           null                           null                           null         
+                   null                           null                           null                           null                 
+           null                           null                           null                           null                         
+   null                           null                           null                           null                           null  
+                          null                           null                           null                           null          
+                  null                           null                           null                           null                  
+          null                           null                           null                           null                          
+  null                           null                           null                           null                           null   
+                         null                           null                           null                           null           
+                 null                           null                           null                           null                   
+         null                           null                           null                           null                           
+ null                           null                           null                           null                           null    
+                        null                           null                           null                           null            
+                null                           null                           null                           null                    
+        null                           null                           null                           null                           n
+ ull                           null                           null                           null                           null     
+                       null                           null                           null                           null             
+               null                           null                           null                           null                     
+       null                           null                           null                           null                           nu
+ ll                           null                           null                           null                           null      
+                      null                           null                           null                           null              
+              null                           null                           null                           null                      
+      null                           null                           null                           ,
+ SPECIAL_VERT_NORMALIZATION_PRESSURES    = 31*-999999.900000000       , 469*-888888.000000000       ,
+ SPECIAL_VERT_NORMALIZATION_HEIGHTS      = 5*424413.181578000        , 5*848826.363157000        ,
+  5*3183098.86183800        , 4*424413.181578000        , 2*848826.363157000        , 4*2122065.90789200        ,
+  4*1587303.39433900        , 2*1000008.61848900        , 469*-888888.000000000       ,
+ SPECIAL_VERT_NORMALIZATION_LEVELS       = 31*-999999.900000000       , 469*-888888.000000000       ,
+ SPECIAL_VERT_NORMALIZATION_SCALE_HEIGHTS        = 31*-999999.900000000       , 469*-888888.000000000       
+ /
+ &OBS_DEF_RADAR_MOD_NML
+ APPLY_REF_LIMIT_TO_OBS  = T,
+ REFLECTIVITY_LIMIT_OBS  =  0.000000000000000E+000,
+ LOWEST_REFLECTIVITY_OBS =  0.000000000000000E+000,
+ APPLY_REF_LIMIT_TO_FWD_OP       = T,
+ REFLECTIVITY_LIMIT_FWD_OP       =  0.000000000000000E+000,
+ LOWEST_REFLECTIVITY_FWD_OP      =  0.000000000000000E+000,
+ MAX_RADIAL_VEL_OBS      =     1000000,
+ ALLOW_WET_GRAUPEL       = F,
+ DIELECTRIC_FACTOR       =  0.224000000000000     ,
+ MICROPHYSICS_TYPE       =           5,
+ ALLOW_DBZTOWT_CONV      = T,
+ N0_RAIN =   8000000.00000000     ,
+ N0_GRAUPEL      =   4000000.00000000     ,
+ N0_SNOW =   3000000.00000000     ,
+ RHO_RAIN        =   1000.00000000000     ,
+ RHO_GRAUPEL     =   400.000000000000     ,
+ RHO_SNOW        =   100.000000000000     
+ /
+ !Finished Program 

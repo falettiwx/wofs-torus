@@ -1,0 +1,45 @@
+# Manually excluded directories
+WRF_RUNS_OLD/
+*!
+ipynb_checkpoints/
+.DS_Store
+combinedir/*
+__pycache__/
+
+# Log files
+*.err
+*.log
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+._dbindex_/
+
+# Compiled object files
+*.o
+*.obj
+
+# Executables
+#*.exe
+*.out
+
+# Libraries
+*.lib
+*.a
+*.so
+*.dll
+
+# Debugging files
+*.dSYM
+*.pdb
+
+# Build directories and logs
+build/
+bin/
+log/
+tmp/
+
+# Editor/IDE specific files
+.vscode/
+*.swp

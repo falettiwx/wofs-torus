@@ -1,0 +1,9 @@
+setenv cycle 6
+setenv init_time "202205240206"
+setenv end_time "202205240212"
+
+setenv TOPDIR /home/william.faletti/wof-torus/obs_seq/combine
+setenv OUTDIR /scratch/wof-torus/combine_obsq/obsq_out
+setenv SCRIPTDIR ${TOPDIR}/scripts
+setenv EXEDIR ${TOPDIR}/exedir
+setenv COMBINEDIR ${TOPDIR}/combinedir

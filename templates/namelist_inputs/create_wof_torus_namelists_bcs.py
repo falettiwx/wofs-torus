@@ -1,0 +1,312 @@
+# Python script to generate namelist.input files for WoF-TORUS members 
+# Created on 24 June 2022 by Billy Faletti for TTU "Imposter WoFS"  <wfaletti@ou.edu>
+# Modified for WoF-TORUS on 20 August 2024 by Billy Faletti <wfaletti@ou.edu>
+
+# Set &time_control variables
+#start_year = '2019'
+#start_month = '05'
+#start_day = '17'
+#start_hour = '21'
+#start_minute = '00'
+
+#end_year = '2019'
+#end_month = '05'
+#end_day = '17'
+#end_hour = '22'
+#end_minute = '00'
+
+for mem_num in range(1,37):
+
+    # Set &physics variables based on mem_num
+    if mem_num in [1, 3, 5, 7, 9, 11, 13, 15, 17, 20, 22, 24, 26, 28, 30, 32, 34, 36]:
+        ra_lw_physics = '1' # RRTM 
+        ra_sw_physics = '1' # Dudhia
+    elif mem_num in [2, 4, 6, 8, 10, 12, 14, 16, 18, 19, 21, 23, 25, 27, 29, 31, 33, 35]:
+        ra_lw_physics = '4' # RRTMG
+        ra_sw_physics = '4' # RRTMG
+        
+    if mem_num in [1, 2, 7, 8, 13, 14, 23, 24, 29, 30, 35, 36]:
+        bl_pbl_physics = '1' # YSU
+        sf_sfclay_physics = '1' # requirement of YSU scheme
+    elif mem_num in [3, 4, 9, 10, 15, 16, 21, 22, 27, 28, 33, 34]:
+        bl_pbl_physics = '2' # MYJ
+        sf_sfclay_physics = '2'
+    elif mem_num in [5, 6, 11, 12, 17, 18, 19, 20, 25, 26, 31, 32]:
+        bl_pbl_physics = '5' # MYNN
+        sf_sfclay_physics = '5'
+
+     # Write to namelist file 
+    f = open(f'namelist.input.member{mem_num}', 'w')
+    f.write(f'''&time_control
+     run_days                            = 0,
+     run_hours                           = 0,
+     run_minutes                         = 0,
+     run_seconds                         = 0,
+     start_year                          = 2020,    
+     start_month                         = ,       
+     start_day                           = ,       
+     start_hour                          = 12,  
+     start_minute                        = 00,
+     start_second                        = 00,
+     end_year                            = 2020,   
+     end_month                           = ,    
+     end_day                             = ,   
+     end_hour                            = 12, 
+     end_minute                          = 00,
+     end_second                          = 00,
+     interval_seconds                    = 3600,
+     input_from_file                     = .true.,  
+     history_interval                    = 60, 
+     frames_per_outfile                  = 1,    
+     cycling                             = .true.,
+     restart                             = .false.,
+     restart_interval                    = 5000,
+     io_form_history                     = 2,
+     io_form_restart                     = 2,
+     io_form_input                       = 2,
+     io_form_boundary                    = 2,
+     debug_level                         = 0,
+     diag_print                          = 1,
+     gsd_diagnostics                     = 1,
+     reset_interval1                     = 15,
+     use_netcdf_classic                  = .true.,
+     /
+    
+     &dfi_control
+     dfi_opt                             = 0,
+     dfi_nfilter                         = 7,
+     dfi_write_filtered_input            = F,
+     dfi_cutoff_seconds                  = 3600,
+     /
+    
+     &domains
+     time_step                           = 12, 
+     time_step_fract_num                 = 0,
+     time_step_fract_den                 = 1,
+     max_dom                             = 1,
+     e_we                                = 301, 250,    
+     e_sn                                = 301, 250,
+     e_vert                              = 51, 60,
+     num_metgrid_levels                  = 51,
+     num_metgrid_soil_levels             = 9,
+     dx                                  = 3000., 1500., 
+     dy                                  = 3000., 1500.,
+     grid_id                             = 1, 2,  
+     parent_id                           = 1, 1,     
+     i_parent_start                      = 0, 136,    
+     j_parent_start                      = 0, 65,  
+     parent_grid_ratio                   = 1, 5,     
+     parent_time_step_ratio              = 1, 5,    
+     feedback                            = 0,
+     smooth_option                       = 0,
+     p_top_requested                     = 3500,
+     interp_type                         = 1,
+     rebalance                           = 0,
+     hypsometric_opt                     = 2,
+     lowest_lev_from_sfc                 = .false.,
+     lagrange_order                      = 1,
+     force_sfc_in_vinterp                = 1,
+     zap_close_levels                    = 500,
+     smooth_cg_topo                      = .true.,
+     sfcp_to_sfcp                        = .false.,
+     adjust_heights                      = .false.,
+     eta_levels   =   1.0000, 0.9980, 0.9940, 0.9870, 0.9750, 0.9590,
+                      0.9390, 0.9160, 0.8920, 0.8650, 0.8350, 0.8020, 0.7660,
+                      0.7270, 0.6850, 0.6400, 0.5920, 0.5420, 0.4970, 0.4565,
+                      0.4205, 0.3877, 0.3582, 0.3317, 0.3078, 0.2863, 0.2670,
+                      0.2496, 0.2329, 0.2188, 0.2047, 0.1906, 0.1765, 0.1624,
+                      0.1483, 0.1342, 0.1201, 0.1060, 0.0919, 0.0778, 0.0657,
+                      0.0568, 0.0486, 0.0409, 0.0337, 0.0271, 0.0209, 0.0151,
+                      0.0097, 0.0047, 0.0000, 
+
+     use_adaptive_time_step              = .true.
+     step_to_output_time                 = .true.
+     target_cfl                          = 1.2
+     max_step_increase_pct               = 5
+     starting_time_step                  = 12
+     max_time_step                       = 20
+     min_time_step                       = 0.25
+     numtiles                             = 1,
+     nproc_x                              = -1,
+     nproc_y                              = -1,
+     reorder_mesh                         = .false.,
+    /
+     &physics
+     write_thompson_tables               = .false.,
+     mp_physics                          = 18, 18,
+     nssl_cccn                           = 1.25e9,
+     nssl_aero_opt                       = 1,
+     do_radar_ref                        = 1,
+     ra_lw_physics                       = {ra_lw_physics}, 4,  
+     ra_sw_physics                       = {ra_sw_physics}, 4,  
+     radt                                = 5, 5,
+     swint_opt                           = 1,
+     ra_sw_eclipse                       = 1,
+     CO2TF                               = 1,
+     sf_sfclay_physics                   = {sf_sfclay_physics}, 5,
+     sf_surface_physics                  = 3, 3, 
+     sf_surface_mosaic                   = 1, 
+     sf_lake_physics                     = 1, 0,
+     bl_pbl_physics                      = {bl_pbl_physics}, 5,  
+     bldt                                = 0, 0,   
+     bl_mynn_tkebudget                   = 0,
+     bl_mynn_tkeadvect                   = .false.,
+     bl_mynn_cloudpdf                    = 0,
+     bl_mynn_edmf                        = 0,
+     bl_mynn_edmf_mom                    = 0,
+     bl_mynn_edmf_tke                    = 0,
+     bl_mynn_mixlength                   = 1,
+     grav_settling                       = 0,
+     scalar_pblmix                       = 1,
+     cu_physics                          = 0, 0,    
+     cudt                                = 0, 0,
+     hailcast_opt                        = 1,
+     haildt                              = 30,
+     elec_physics                        = 4,
+     nssl_ipelec                         = 2,
+     nssl_isaund                         = 11,
+     isfflx                              = 1,
+     ifsnow                              = 1,
+     icloud                              = 1,
+     icloud_bl                           = 1,
+     surface_input_source                = 1,
+     num_soil_layers                     = 9,
+     sf_urban_physics                    = 0,
+     mp_zero_out                         = 2,
+     mp_zero_out_thresh                  = 1.e-10,
+     use_aero_icbc                       = .true.,
+     use_rap_aero_icbc                   = .false.,
+     maxiens                             = 1,
+     maxens                              = 3,
+     maxens2                             = 3,
+     maxens3                             = 16,
+     ensdim                              = 144,
+     usemonalb                           = .true.,
+     rdlai2d                             = .true.,
+     num_land_cat                        = 21,
+     mosaic_lu                           = 1
+     mosaic_soil                         = 1
+     alb_sol                             = 1,
+     fractional_seaice                   = 1,
+     seaice_threshold                    = 271.4,
+     o3input                             = 0,
+     aer_opt                             = 3,
+     prec_acc_dt                         = 15.
+     tracer_pblmix                       = 0,
+     /
+     &fdda
+     /
+    
+     &stoch
+     nens                                = 1,
+     rand_perturb                        = 0,
+     sppt                                = 0,
+     skebs                               = 1,
+     spp                                 = 0,
+     spp_conv                            = 0,
+     spp_pbl                             = 0,
+     spp_lsm                             = 0,
+     /
+    
+     &dynamics
+     w_damping                           = 1,
+     w_crit_cfl                          = 1.5,
+     diff_opt                            = 1,
+     km_opt                              = 4,
+     hybrid_opt                          = 0,
+     diff_6th_opt                        = 2, 
+     diff_6th_factor                     = 0.01, 
+     damp_opt                            = 3, 
+     zdamp                               = 5000.,  5000.,
+     dampcoef                            = 0.2,    0.2,
+     use_input_w                         = .true., 
+     khdif                               = 0,      0, 
+     kvdif                               = 0,      0,
+     SMDIV                               = 0.1,    0.1,
+     EMDIV                               = 0.01,   0.01, 
+     EPSSM                               = 0.48,    0.1,   
+     non_hydrostatic                     = .true., .true., 
+     moist_adv_opt                       = 4,      2,  
+     scalar_adv_opt                      = 4,      2,
+     TIME_STEP_SOUND                     = 6,      6, 
+     H_MOM_ADV_ORDER                     = 5,      5, 
+     V_MOM_ADV_ORDER                     = 3,      3,
+     H_SCA_ADV_ORDER                     = 5,      5, 
+     V_SCA_ADV_ORDER                     = 3,      3,  
+     moist_mix6_off                      = .false.,
+     chem_mix6_off                       = .true.,
+     tracer_mix6_off                     = .true.,
+     scalar_mix6_off                     = .false.,
+     tke_mix6_off                        = .true.,
+     chem_adv_opt                        = 2,
+     tracer_opt                          = 0,
+     /
+    
+     &bdy_control
+     spec_bdy_width                      = 5,
+     spec_zone                           = 1,
+     relax_zone                          = 4,
+     specified                           = .true., .false., .false.,
+     nested                              = .false., .true., .true.,
+     /
+    
+     &grib2
+     /
+    
+     &chem
+     chem_opt                            = 18,       0,
+     chemdt                              = 0,        0,
+     chem_in_opt                         = 1,        0,
+     have_bcs_chem                       = .true.,  .false.,
+    
+     vertmix_onoff                       = 1,        1,
+     enh_vermix                          = .true.,
+     gas_drydep_opt                      = 0,        1,
+     aer_drydep_opt                      = 111,      1,
+     wetscav_onoff                       = -1,       0,
+    
+     biomass_burn_opt                    = 4,        0,
+     bb_dcycle                           = .true.,  .true.,
+     flam_part                           = 0.75,
+     plumerise_flag                      = 2,
+     plumerisefire_frq                   = 60,       0,
+    
+     chem_conv_tr                        = 0,        1,
+     conv_tr_wetscav                     = 0,        1,
+     conv_tr_aqchem                      = 0,        1,
+    
+     simple_dir_fdb                      = 1,
+     simple_ind_fdb                      = 0,
+    
+     debug_chem                          = .false.,
+     chemdiag                            = 111
+    
+     io_style_emissions                  = 0,
+     emiss_opt                           = 0,        3,
+     kemit                               = 1,
+     emiss_opt_vol                       = 0,
+     aircraft_emiss_opt                  = 0,
+     phot_opt                            = 0,        3,
+     photdt                              = 30,       30,
+     bio_emiss_opt                       = 0,        1,
+     ne_area                             = 0,
+     bioemdt                             = 30,       30,
+     gas_bc_opt                          = 0,        1,
+     gas_ic_opt                          = 0,        1,
+     aer_bc_opt                          = 0,        1,
+     aer_ic_opt                          = 0,        1,
+     seas_opt                            = 0,
+     dust_opt                            = 0,
+     dmsemis_opt                         = 0,
+     aer_ra_feedback                     = 1,        1,
+     aer_op_opt                          = 0,
+     opt_pars_out                        = 0,
+     diagnostic_chem                     = 0,
+     /
+    
+     &namelist_quilt
+     nio_tasks_per_group = 0,
+     nio_groups = 1,
+     /
+    ''')
+    f.close()

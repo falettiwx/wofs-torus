@@ -1,0 +1,183 @@
+#!/bin/csh
+#
+set echo
+# DART software - Copyright 2004 - 2011 UCAR. This open source software is
+# provided by UCAR, "as is", without charge, subject to all terms of use at
+# http://www.image.ucar.edu/DAReS/DART/DART_download
+#
+# $Id: add_noise.csh 4945 2011-06-02 22:29:30Z thoar $
+
+ echo Calling add_noise
+ set start_time = `date  +%s`
+ echo $start_time
+
+### MPI STUFF
+set MPLCONFIGDIR = /scratch/tajones/temp
+
+
+# ../add_noise.csh $wrfsecs $wrfdays $state_copy $ensemble_member $temp_dir $CENTRALDIR
+# The following are passed from the advance model script:
+set wrfsecs = $1
+set wrfdays = $2
+set state_copy = $3
+set ensemble_member = $4
+set temp_dir = $5
+set CENTRALDIR = $6
+set dt = $7
+
+# notes - do we need to do a 'touch' here for files that don't yet exist?
+# The remaining lines in this section control the additive noise (Dowell et al. 2008).
+#
+# if run_add_pert is 1, then grid_refl_obs and add_pert_where_high_refl will be run
+# at intervals of time_between_perturbations (in seconds)
+# other definitions that don't need to be passed:
+
+set MOVE = '/bin/mv -f'
+set  REMOVE = '/bin/rm -rf'
+
+set run_add_pert = 1
+#set time_between_perturbations = 300
+set time_between_perturbations = 900
+
+set refl_min = ${refl_thresh}       # minimum reflectivity threshold (dBZ) for where noise is added
+set innov = ${refl_innov}
+
+set lh = 9000.0                     # horizontal length scale (m) for perturbations
+set lv = 3000.0                     # vertical length scale (m) for perturbations
+
+set transition_time_days = 151500   # gregorian day when transition occurs from first perturbation magnitude to second
+set transition_time_secs = 43200    # seconds in day when transition occurs from first perturbation magnitude to second
+
+set u_noise_1 = 0.50                # std. dev. of u noise (m/s), before smoothing, during first time period
+set v_noise_1 = 0.50                # std. dev. of v noise (m/s), before smoothing, during first time period
+set w_noise_1 = 0.0                 # std. dev. of w noise (m/s), before smoothing, during first time period
+set t_noise_1 = 0.50                # std. dev. of temperature noise (K), before smoothing, during first time period
+set td_noise_1 = 0.50               # std. dev. of dewpoint noise (K), before smoothing, during first time period
+set qv_noise_1 = 0.0                # std. dev. of water vapor noise (g/kg), before smoothing, during first time period
+
+set u_noise_2 = 0.50                # std. dev. of u noise (m/s), before smoothing, during second time period
+set v_noise_2 = 0.50                # std. dev. of v noise (m/s), before smoothing, during second time period
+set w_noise_2 = 0.0                 # std. dev. of w noise (m/s), before smoothing, during second time period
+set t_noise_2 = 0.50                # std. dev. of temperature noise (K), before smoothing, during second time period
+set td_noise_2 = 0.50               # std. dev. of dewpoint noise (K), before smoothing, during second time period
+set qv_noise_2 = 0.0                # std. dev. of water vapor noise (g/kg), before smoothing, during second time period
+
+#
+#****************************** END OF USER SPECIFICATIONS *********************************
+###################################################################################################
+#
+# This code section is for the additive noise (Dowell et al. 2008).
+# Run grid_refl_obs and add_pert_where_high_refl, if required.
+#
+#
+# GSR passed information needed below: wrfsecs, wrfdays
+   set need_to_run_grid_refl_obs = 0
+   set perturbations_needed = 0
+
+   if ($run_add_pert == 1) then
+     if (-e ../last_perturbation_time_${ensemble_member}.txt) then
+       set secday = `head -1 ../last_perturbation_time_${ensemble_member}.txt`
+       set pertsecs = $secday[1]
+       set pertdays = $secday[2]
+       ${REMOVE} ../last_perturbation_time_${ensemble_member}.txt
+     else
+       set pertsecs = $wrfsecs
+       set pertdays = $wrfdays
+       @ pertsecs = $pertsecs - $time_between_perturbations
+     endif
+
+     @ time_since_last_perturbation = 86400 * ($wrfdays - $pertdays) + ($wrfsecs - $pertsecs)
+
+     echo "wrfdays wrfsecs = ${wrfdays} ${wrfsecs}"
+     echo "time_since_last_perturbation = ${time_since_last_perturbation}"
+     echo "time_between_perturbations = ${time_between_perturbations}"
+
+     if ($time_since_last_perturbation >= $time_between_perturbations ) then
+       set perturbations_needed = 1
+       if ($state_copy == 1) then
+         set need_to_run_grid_refl_obs = 1
+       endif
+     endif
+
+   endif
+
+   if ( ($need_to_run_grid_refl_obs == 1) && ($ensemble_member == 1) ) then
+
+     cd ..
+
+     set days_end = $wrfdays
+#     set seconds_end = $wrfsecs
+     @ seconds_end = $wrfsecs + 150
+     set days_begin = $days_end
+#     @ seconds_begin = $seconds_end - $time_between_perturbations
+     @ seconds_begin = $wrfsecs - 149
+
+     echo "days_end seconds_end days_begin seconds_begin = ${days_end} ${seconds_end} ${days_begin} ${seconds_begin}"
+
+     while ($seconds_begin < 0)
+       @ days_begin = $days_begin - 1
+       @ seconds_begin = $seconds_begin + 86400
+     end     
+
+     echo "member ${ensemble_member} calling grid_refl_obs"
+     sleep 1
+     
+     srun -n 1 python ${PYDIR}/grid_refl_obs.py ${RUNDIR}/OBSOUT/obs_seq.nc.${dt} $refl_min $innov wrfinput_d01 $wrfsecs $wrfdays wrf
+
+     ${MOVE} refl_obs.txt refl_obs_${wrfdays}_${wrfsecs}.txt
+     ${MOVE} refl_obs.pkl refl_obs_${wrfdays}_${wrfsecs}.pkl
+
+     cat > finished.grid_refl_obs_${wrfdays}_${wrfsecs} <<EOF
+grid_refl_obs has finished
+EOF
+     
+     cd $temp_dir
+
+   endif
+
+   if ($perturbations_needed == 1) then
+
+     while (! -e ../finished.grid_refl_obs_${wrfdays}_${wrfsecs})
+       echo "member ${ensemble_member} waiting for ../finished.grid_refl_obs_${wrfdays}_${wrfsecs} to appear"
+       sleep 2
+     end   
+     ${COPY} ${RUNDIR}/refl_obs_${wrfdays}_0${wrfsecs}.pkl ${RUNDIR}/$temp_dir
+     ${COPY} ${RUNDIR}/wofs_wrf_grid_kdtree.pkl ${RUNDIR}/$temp_dir
+     ${COPY} ${RUNDIR}/wrf_XYZ.pkl  ${RUNDIR}/$temp_dir
+
+     @ transition_relative_time = 86400 * ($wrfdays - $transition_time_days) + ($wrfsecs - $transition_time_secs)
+
+      if ($transition_relative_time <= 0) then
+        echo "(1) member ${ensemble_member} calling add_pert_where_high_refl.py"
+           srun -n 1 python ${PYDIR}/add_pert_where_high_refl.py wrfinput_d01 $lh $lv $u_noise_1 $v_noise_1 $w_noise_1 $t_noise_1 $td_noise_1 $qv_noise_1 $wrfsecs $wrfdays $ensemble_member wrf
+       else
+        echo "(2) member ${ensemble_member} calling add_pert_where_high_refl.py"
+	   srun -n 1 python ${PYDIR}/add_pert_where_high_refl.py wrfinput_d01 $lh $lv $u_noise_2 $v_noise_2 $w_noise_2 $t_noise_2 $td_noise_2 $qv_noise_2 $wrfsecs $wrfdays $ensemble_member wrf
+       endif
+
+     cd ${CENTRALDIR}
+     cat > last_perturbation_time_${ensemble_member}.txt <<EOF
+     ${wrfsecs} ${wrfdays}
+EOF
+     cd $temp_dir
+
+   endif
+#
+#
+# end of additive noise section
+#
+###################################################################################################
+
+ echo "add_noise finished"
+ set end_time = `date  +%s`
+ echo $end_time
+
+ @ total_time = $end_time - $start_time
+ echo "TOTAL DURATION = $total_time"
+
+exit $status
+
+# <next few lines under version control, do not edit>
+# $URL: https://proxy.subversion.ucar.edu/DAReS/DART/releases/Kodiak/models/wrf/shell_scripts/add_noise.csh $
+# $Revision: 4945 $
+# $Date: 2011-06-02 17:29:30 -0500 (Thu, 02 Jun 2011) $

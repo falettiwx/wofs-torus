@@ -1,0 +1,19 @@
+#!/bin/csh
+#==================================================================
+#SBATCH -J obsq2nc
+#SBATCH -o obsq2nc.log
+#SBATCH -e obsq2nc.err
+#SBATCH -p batch
+#SBATCH -n 1
+#SBATCH -t 0:20:00
+#==================================================================
+
+source obsqenv
+
+#set ITER_DIR=$1
+
+#cd ${ITER_DIR}
+
+srun ./obs_seq_to_netcdf
+
+touch nc_done

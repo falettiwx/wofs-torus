@@ -1,0 +1,19 @@
+#!/bin/csh
+#==================================================================
+#SBATCH -J obsq_combine
+#SBATCH -o combine_obsq.log
+#SBATCH -e combine_obsq.err
+#SBATCH -p batch
+#SBATCH -n 1
+#SBATCH -t 0:20:00
+#==================================================================
+
+source obsqenv
+
+set ITER_DIR=$1
+
+cd ${ITER_DIR}
+
+srun ./obs_sequence_tool
+
+touch obsq_done

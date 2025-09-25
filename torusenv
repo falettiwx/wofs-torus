@@ -1,0 +1,11 @@
+setenv event   20220523
+setenv starttime 2200
+setenv startdate  ${event}${starttime}
+
+setenv TOP_DIR  /scratch/wof-torus
+setenv RUNDIR /scratch/wof-torus/${event}
+setenv EXEDIR /scratch/wof-torus/${event}/WRF_RUN
+setenv SCRIPTDIR  /scratch/home/william.faletti/wof-torus
+setenv CENTRALDIR  /scratch/home/william.faletti/wof-torus
+#setenv OBSDIR /scratch/home/OBS_SEQ
+
